@@ -23,5 +23,5 @@ blocked ip=[::1]:53395(::1) ua=curl/7.64.1
 ```
 3 total requests were made but 2 of the three were blocked because they came from the same ip address
 
-# default uses in memory as backend but set REDIS_URL to point to a redis instance to have many proxies that know about other requests
-
+# Production usage
+default uses in memory as backend but set REDIS_URL to point to a redis instance to have many proxies that know about other requests
