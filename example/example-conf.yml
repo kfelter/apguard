@@ -1,0 +1,6 @@
+destination: http://greeter
+rules:
+    - name: vegeta-ua
+      mode: ua
+      pattern: "vegeta"
+      delay: 1s

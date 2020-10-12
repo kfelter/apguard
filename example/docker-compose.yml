@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  apguard:
+    image: apguard/rpx:latest
+    ports:
+      - "9001:80"
+      - "6060:6060"
+    entrypoint: "/rpx"
+    environment:
+        - PROXY_CONF=/etc/proxy/conf.yml
+    volumes:
+        - "./example-conf.yml:/etc/proxy/conf.yml"
+
+  greeter:
+    image: apguard/greeter:latest
+    ports:
+        - "9000:80"
+    entrypoint: "/g"
