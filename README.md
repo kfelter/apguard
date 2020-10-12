@@ -1,6 +1,44 @@
 # apguard
 distributed proxy that acts as a rate limiter for downstream http services
 
+# Proxy a service in docker compose
+docker-compose.yml
+```yml
+version: "3.8"
+services:
+  apguard:
+    image: apguard/rpx:latest
+    ports:
+      - "9001:80"
+    environment:
+        - PROXY_CONF=/etc/proxy/conf.yml
+    volumes:
+        - "./example-conf.yml:/etc/proxy/conf.yml"
+
+  greeter:
+    image: apguard/greeter:latest
+    ports:
+        - "9000:80"
+```
+
+example-conf.yml
+```yml
+destination: http://greeter
+rules:
+    - name: vegeta-ua
+      mode: ua
+      pattern: "vegeta"
+      delay: 1s
+```
+
+
+Other modes are 
+- `ip+ua`: means the same ip could have different user agents allowed to query the api
+- `ip`:    rate limits on ip address only
+
+
+
+
 # Usage
 1. `go mod vendor`
 2. start the greeter service `go run cmd/greeter/main.go`
@@ -30,10 +68,12 @@ default uses in memory as backend but set REDIS_URL to point to a redis instance
 find an example in the `/example` folder
 
 to run the example
-1. `go mod vendor`
-2. `make build && make ex`
-3. (install vegeta if you don't already have it) `brew install vegeta`
-4 `vegeta attack -duration=15s -rate=1000/s -targets=example/proxy-targets.conf | tee results.bin | vegeta report`
+```
+go mod vendor
+make build && make ex
+brew install vegeta # install vegeta if you don't already have it
+vegeta attack -duration=15s -rate=1000/s -targets=example/proxy-targets.conf | tee results.bin | vegeta report
+```
 
 
 Vegeta report
