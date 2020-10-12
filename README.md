@@ -25,3 +25,12 @@ blocked ip=[::1]:53395(::1) ua=curl/7.64.1
 
 # Production usage
 default uses in memory as backend but set REDIS_URL to point to a redis instance to have many proxies that know about other requests
+
+# Example
+find an example in the `/example` folder
+
+to run the example
+1. `go mod vendor`
+2. `make build && make ex`
+3. (install vegeta if you don't already have it) `brew install vegeta`
+4 `vegeta attack -duration=15s -rate=1000/s -targets=example/proxy-targets.conf | tee results.bin | vegeta report`
