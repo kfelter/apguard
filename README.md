@@ -34,3 +34,20 @@ to run the example
 2. `make build && make ex`
 3. (install vegeta if you don't already have it) `brew install vegeta`
 4 `vegeta attack -duration=15s -rate=1000/s -targets=example/proxy-targets.conf | tee results.bin | vegeta report`
+
+
+Vegeta report
+```
+Requests      [total, rate, throughput]         75000, 5000.06, 1.07
+Duration      [total, attack, wait]             15.002s, 15s, 1.862ms
+Latencies     [min, mean, 50, 90, 95, 99, max]  531.896µs, 34.129ms, 12.518ms, 100.251ms, 140.86ms, 226.763ms, 1.203s
+Bytes In      [total, mean]                     192, 0.00
+Bytes Out     [total, mean]                     0, 0.00
+Success       [ratio]                           0.02%
+Status Codes  [code:count]                      200:16  429:74984  
+Error Set:
+429 Too Many Requests
+```
+
+Vegeta plot
+![](vegeta-plot.png?raw=true)
