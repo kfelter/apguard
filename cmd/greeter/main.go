@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	p = flag.String("port", "9000", "server port")
+	p = flag.String("port", "80", "server port")
 )
 
 func main() {
@@ -18,8 +18,8 @@ func main() {
 
 func greetHandler(w http.ResponseWriter, req *http.Request) {
 	log.Printf("Hello there %s\n", req.RemoteAddr)
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`Hello there` + "\n"))
 	ioutil.ReadAll(req.Body)
 	req.Body.Close()
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`Hello there` + "\n"))
 }
