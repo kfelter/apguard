@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"net"
 	"net/http"
 	"regexp"
@@ -14,7 +13,6 @@ func (c Conf) MatchesRule(r *http.Request) (Rule, string, bool) {
 
 	for _, rule := range c.Rules {
 		matchedUA, _ := regexp.Match(rule.UARegex, []byte(ua))
-		log.Println(matchedUA, rule.UARegex, ua)
 		if matchedUA && rule.Mode == "ua" {
 			return rule, ua, true
 		}

@@ -43,7 +43,7 @@ func limiter(next http.HandlerFunc) http.HandlerFunc {
 		if _, err := kvDB.Get(key); err == nil {
 			w.WriteHeader(http.StatusTooManyRequests)
 			// w.Write([]byte(fmt.Sprintf("Not Ready: must wait %v between requests\n", rule.Delay)))
-			logCh <- fmt.Sprintf("blocked key=%s rule=%s\n", key, rule.Name)
+			logCh <- fmt.Sprintf("blocked key=%s rule=%s", key, rule.Name)
 			return
 		}
 		kvDB.Set(key, true, rule.Delay)
