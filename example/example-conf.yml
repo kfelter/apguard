@@ -4,3 +4,7 @@ rules:
       mode: ua
       pattern: "vegeta"
       delay: 1s
+    
+    - name: ip
+      mode: ip
+      delay: 1s

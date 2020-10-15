@@ -12,6 +12,7 @@ var (
 )
 
 func main() {
+	flag.Parse()
 	http.HandleFunc("/", greetHandler)
 	panic(http.ListenAndServe(":"+*p, nil))
 }
